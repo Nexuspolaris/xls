@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Appel Offres</h1>
+<div id="form_container" style="width: 600px; height: 630px;"></div>
+<script type="text/javascript" charset="UTF-8">
+// api-init
+myLayout = new dhtmlXLayoutObject({
+            parent: document.body,  // parent container
+            pattern: "3E",           // layout's pattern
+            cells: [ 
+        {
+            id:             "a",  // id of the cell you want to configure
+            text:           "Menu",     // header text
+            collapsed_text: "Menu",   // header text for a collapsed cell
+            header:         true,      // hide header on init
+            height:          60
+        },{
+            id:             "b",        // id of the cell you want to configure
+            text:           "Tickets",     // header text
+            collapsed_text: "Liste",   // header text for a collapsed cell
+            header:         true,      // hide header on init
+            height:68        // cell init width
+        },{
+            id:             "c",        // id of the cell you want to configure
+            text:           "Ticket",     // header text
+            collapsed_text: "Liste",   // header text for a collapsed cell
+            header:         false,      // hide header on init
+                    // cell init width
+        }]});
+    
+    var toolbar = myLayout.cells("a").attachToolbar();
+    toolbar.loadStruct("<%= action_path %>"); 
+    toolbar.attachEvent("onButtonClick", function(name, command){
+      toolbar.send("<%= action_submit_path %>", "post", function(loader, response){
+        alert(response);
+      });
+    });
+    var grid = myLayout.cells("c").attachGrid();
+    var searchform = myLayout.cells("b").attachForm();
+    searchform.loadStruct("<%= form_path %>");
+    searchform.enableLiveValidation(true);
+    searchform.attachEvent("onButtonClick", function(name, command){
+      searchform.send("<%= submit_form_path%>", "post", function(loader, response){
+        //var responsej = JSON.parse(response);
+        alert(response);
+        //grid.clearAll();
+        grid.updateFromJSON(test_reponse,true,true);        
+      //  var value = 
+      //  alert(searchform.getValue(societe));
+      //  grid.clearAll(); grid.load("<%= submit_form_path %>?societe="+value,"json");
+      });
+    });
+    grid.setImagePath("assets/imgs/");
+    grid.setColumnIds("num,description,societe,date_creation,date_assign,delai_prise_en_charge,date_resolution,delai_resolution");
+    grid.setHeader("N° Ticket, Description, Société, Date de création, Date d'assignation, temps de prise en charge, Date de resolution, Temps de résolution");
+    grid.attachHeader("#text_filter,#text_filter,#text_filter,#text_filter,#text_filter,#text_filter,#text_filter,#text_filter");
+    grid.setColSorting("str,str,str,date,date,str,date,str");
+    grid.setInitWidths("80,*,115,115,115,80,115,80");
+    grid.setSkin("dhx_skyblue");
+    grid.setColTypes("ed,ed,ed,dhxCalendar,dhxCalendar,ed,dhxCalendar,ed");
+    grid.init();
+    grid.load("<%= data_path %>", "json");
+    
+</script>
+

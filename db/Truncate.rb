@@ -1,0 +1,3 @@
+Tickets.delete_all
+Statuts.delete_all
+Ss_categories.delete_all

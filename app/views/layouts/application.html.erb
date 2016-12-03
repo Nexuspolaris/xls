@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Xls</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'dhtmlx', :media => 'all' %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'dhtmlx' %>
+  </head>
+<script>
+
+    var myLayout;
+    function doOnLoad() {
+        myLayout = new dhtmlXLayoutObject({
+            parent: document.body,  // parent container
+            pattern: "2U"           // layout's pattern
+        });
+        myLayout.cells("a").setWidth(200);
+        loadingView();
+    }
+
+</script>
+  <body onLoad(dhtmlxLoad();>
+    <%= yield %>
+  </body>
+</html>
