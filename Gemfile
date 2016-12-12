@@ -41,6 +41,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec'
   gem 'pry'
+  gem 'seed_dump'
 end
 
 #gem 'activeadmin', github: 'activeadmin'
