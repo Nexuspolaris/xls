@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212222833) do
+ActiveRecord::Schema.define(version: 20161225185641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20161212222833) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "code"
+    t.integer  "typexls"
   end
 
   create_table "procedures", force: :cascade do |t|
@@ -96,6 +97,7 @@ ActiveRecord::Schema.define(version: 20161212222833) do
     t.string   "code_pending"
     t.string   "service"
     t.string   "equipe"
+    t.string   "prevu"
     t.index ["agent_id"], name: "index_tickets_on_agent_id", using: :btree
     t.index ["num"], name: "index_tickets_on_num", using: :btree
     t.index ["procedure_id"], name: "index_tickets_on_procedure_id", using: :btree
@@ -103,6 +105,16 @@ ActiveRecord::Schema.define(version: 20161212222833) do
     t.index ["societe_id"], name: "index_tickets_on_societe_id", using: :btree
     t.index ["ss_categorie_id"], name: "index_tickets_on_ss_categorie_id", using: :btree
     t.index ["statut_id"], name: "index_tickets_on_statut_id", using: :btree
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string   "item_type",  null: false
+    t.integer  "item_id",    null: false
+    t.string   "event",      null: false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   end
 
 end

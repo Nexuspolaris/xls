@@ -80,8 +80,9 @@ COPY . .
 # We can get away with using the . for the second argument because
 # this is how the unix command cp (copy) works. It stands for the
 # current directory.
+RUN bundle exec rake assets:precompile
 
-RUN bundle exec rake RAILS_ENV=production DATABASE_URL=postgresql://user:pass@127.0.0.1/dbname ACTION_CABLE_ALLOWED_REQUEST_ORIGINS=foo,bar SECRET_TOKEN=dummytoken assets:precompile
+#RUN bundle exec rake RAILS_ENV=production DATABASE_URL=postgresql://user:pass@127.0.0.1/dbname ACTION_CABLE_ALLOWED_REQUEST_ORIGINS=foo,bar SECRET_TOKEN=dummytoken
 # Provide a dummy DATABASE_URL and more to Rails so it can pre-compile
 # assets. The values do not need to be real, just valid syntax.
 #

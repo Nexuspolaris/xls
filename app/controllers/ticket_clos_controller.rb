@@ -40,7 +40,7 @@ class TicketClosController < ApplicationController
     #societes = Societe.all
     societes = Societe.all.limit 1 # for testing
     societes.each do |societe|
-      (eval("MyXls"+societe.subclassname)).export period,societe
+      (eval("MyXls"+societe.subclassname)).export period, societe
     end
     redirect_to action: index
   end

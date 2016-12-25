@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # gestion des durées
 gem 'duration', '~> 0.1.0'
 gem 'rubyXL'
+gem 'paper_trail'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

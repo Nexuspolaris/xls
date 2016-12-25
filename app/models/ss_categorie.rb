@@ -12,6 +12,7 @@
 
 class SsCategorie < ApplicationRecord
   has_many :ticket
+  belongs_to :category
   def make_exists(name)
     find_or_create_by(name: name)
   end
